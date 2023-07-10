@@ -1,9 +1,9 @@
 <template>
     <tr style="height: 60px;">
-        <th scope="row">1</th>
         <td>{{ product.nombre }}</td>
         <td>{{ product.stock }}</td>
         <td>$ {{ product.precio }}</td>
+        <td><img :src="product.imagen" style="width: 150px;" class="img-fluid img-thumbnail" /></td>
         <td class="col-2">
             <span v-if="loggedIn">
                 <button type="button" class="btn btn-primary btn-sm">Editar</button>
