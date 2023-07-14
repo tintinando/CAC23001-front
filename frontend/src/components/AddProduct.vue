@@ -6,7 +6,8 @@
             <div v-for="(field, index) in formFields" :key="index" class="mb-2 row col-sm-6">
                 <label class="col-sm-3 col-form-label">{{ field.label }}</label>
                 <div class="col-sm-9">
-                    <input class="form-control" @input="handleInput()" v-model="field.value" :type="field.type">
+                    <input class="form-control" @input="handleInput()" v-model="field.value" :type="field.type"
+                        >
                 </div>
             </div>
             <button :disabled="!formCompleted" type="submit" class="btn btn-primary">Aceptar</button>

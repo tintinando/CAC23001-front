@@ -18,6 +18,9 @@
             <RouterLink class="nav-link" aria-current="page" to="/addproduct">Agregar productos</RouterLink>
           </li>
         </ul>
+        <span class="me-5">
+          <SearchBar />
+        </span>
         <span>
           <Login />
         </span>
@@ -26,18 +29,13 @@
   </nav>
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue';
 import Login from './Login.vue';
+import SearchBar from './helpers/SearchBar.vue';
 import { RouterLink } from 'vue-router'
-import { mapState } from 'vuex';
+import { useStore } from 'vuex';
 
-export default {
-  computed: {
-    ...mapState(['loggedIn'])
-  },
-  components:{
-    Login,
-  }
-};
-
+const store = useStore();
+const loggedIn = computed(() => store.state.loggedIn);
 </script>

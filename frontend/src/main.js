@@ -13,4 +13,4 @@ app.mount('#app')
 
 // recupero estado de logueo del localStorage
 const isLoggedIn = getLoggedInFromLS();
-store.commit('SET_IS_LOGGED_IN', isLoggedIn);
+store.commit('setIsLoggedIn', isLoggedIn);

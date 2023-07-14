@@ -12,18 +12,17 @@
     </form>
 </template>
 
-<script>
-import { mapMutations, mapState } from 'vuex';
+<script setup>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
-export default {
-    computed: {
-        ...mapState(['loggedIn'])
-    },
-    methods: {
-        ...mapMutations(['SET_IS_LOGGED_IN']),
-        toggleLogin() {
-            this.SET_IS_LOGGED_IN(!this.loggedIn);
-        }
-    }
+const store = useStore();
+
+const setIsLoggedIn = (newState) => store.commit('setIsLoggedIn', newState);
+const loggedIn = computed(() => store.state.loggedIn);
+
+const toggleLogin = () => {
+    setIsLoggedIn(!loggedIn.value);
 };
+
 </script>

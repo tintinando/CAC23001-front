@@ -45,19 +45,13 @@
 }
 </style>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 
-export default {
-    name: 'DropZone',
-    setup() {
-        const active = ref(false);
+const active = ref(false);
 
-        const toggleActive = (e) => {
-            active.value = !active.value;
-        };
-
-        return{ active, toggleActive }
-    },
+const toggleActive = (e) => {
+    active.value = !active.value;
 };
+
 </script>

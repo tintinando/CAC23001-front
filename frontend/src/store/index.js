@@ -1,27 +1,35 @@
 import { createStore } from "vuex";
 import { setLoggedInInLS } from '../utils/localStorageUtils'
 
-export default createStore({
-    state: {
-        loggedIn: false,
-    },
-    getters: {
-        isLoggedIn: state => {
-            return state.loggedIn;
-        },
-    },
-    // setter sincrónico
-    mutations: {
-        SET_IS_LOGGED_IN(state, loggedIn) {
-            state.loggedIn = loggedIn;
-            setLoggedInInLS(loggedIn);
-        }
-    },
-    // setter asincrónico
-    actions: {
+const state = {
+    loggedIn: false,
+    searchFilter: [],
+};
 
+const getters = {
+    isLoggedIn: state => {
+        return state.loggedIn;
     },
-    modules: {
-
+    getSearchFilter: state => {
+        return state.searchFilter;
     }
+};
+
+const actions = {};
+
+const mutations = {
+    setIsLoggedIn(state, loggedIn) {
+        state.loggedIn = loggedIn;
+        setLoggedInInLS(loggedIn);
+    },
+    setSearchFilter(state, searchFilter) {
+        state.searchFilter = searchFilter;
+    },
+};
+
+export default createStore({
+    state,
+    getters,
+    actions,
+    mutations,
 })

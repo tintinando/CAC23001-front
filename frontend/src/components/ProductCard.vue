@@ -17,54 +17,35 @@
     </tr>
 </template>
 
-<script>
-import { mapState } from 'vuex';
-import apiURL from '../config/api';
-import axios from 'axios';
-import { ref, onBeforeUnmount } from 'vue';
+<script setup>
+import { useStore } from 'vuex';
+import { defineProps, ref, computed } from 'vue';
 import Countdown from './helpers/Countdown.vue';
 
-export default {
-    setup(props) {
-        const waitingDelete = ref(false);
+const store = useStore();
+const loggedIn = computed(() => store.state.loggedIn);
 
-        const handleDelete = () => {
-            waitingDelete.value = true;
-        }
+defineProps({
+    product: { type: Object, required: true },
+    deleteProduct: { type: Function, required: true },
+    editProduct: { type: Function, required: true },
+});
 
-        const handleAbortDelete = () => {
-            waitingDelete.value = false;
-        }
+const waitingDelete = ref(false);
 
-        const handleTimeoutDelete = () => {
-            waitingDelete.value = false;
-            props.deleteProduct(props.product.id);
-        }
+const handleDelete = () => {
+    waitingDelete.value = true;
+}
 
-        return { waitingDelete, handleDelete, handleAbortDelete, handleTimeoutDelete };
-    },
+const handleAbortDelete = () => {
+    waitingDelete.value = false;
+}
 
-    computed: {
-        ...mapState(['loggedIn'])
-    },
-    props: {
-        product: {
-            type: Object,
-            required: true
-        },
-        deleteProduct: {
-            type: Function,
-            required: true
-        },
-        editProduct: {
-            type: Function,
-            required: true
-        }
-    },
-    components: {
-        Countdown,
-    },
+const handleTimeoutDelete = () => {
+    waitingDelete.value = false;
+    props.deleteProduct(props.product.id);
 };
+
 </script>
 
 <style scoped>
@@ -76,5 +57,10 @@ export default {
 .txt-through {
     color: red;
     text-decoration: line-through;
+}
+
+.txt-through td {
+    background-color: rgb(218, 218, 218);
+    transition: 0.8s all;
 }
 </style>
