@@ -4,7 +4,7 @@
         <td>{{ product.stock }}</td>
         <td>$ {{ product.precio }}</td>
         <td><img :src="product.imagen" style="width: 150px;" class="img-fluid img-thumbnail"
-                :class="{ 'img-grayscale': waitingDelete }" /></td>
+                :class="{ 'img-grayscale': waitingDelete }" @click="selectImg(product.imagen)" /></td>
         <td class="col-2">
             <span v-if="loggedIn && !waitingDelete">
                 <button @click="editProduct(product)" type="button" class="btn btn-primary btn-sm">Editar</button>
@@ -15,6 +15,8 @@
             </span>
         </td>
     </tr>
+
+
 </template>
 
 <script setup>
@@ -29,6 +31,7 @@ defineProps({
     product: { type: Object, required: true },
     deleteProduct: { type: Function, required: true },
     editProduct: { type: Function, required: true },
+    selectImg: {type: Function}
 });
 
 const waitingDelete = ref(false);

@@ -3,7 +3,7 @@ import { setLoggedInInLS } from '../utils/localStorageUtils'
 
 const state = {
     loggedIn: false,
-    searchFilter: [],
+    searchFilter: '',
 };
 
 const getters = {
