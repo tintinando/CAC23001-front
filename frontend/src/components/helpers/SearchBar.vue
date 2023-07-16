@@ -45,6 +45,7 @@ const handleInput = () => {
     timeoutId = setTimeout(() => {
         if (input.value === '') {
             suggestions.value = [];
+            setSearchFilter('');
         } else {
             fetchSuggestions();
         };

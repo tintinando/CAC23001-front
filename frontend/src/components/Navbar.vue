@@ -9,7 +9,8 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <RouterLink class="nav-link" aria-current="page" to="/">Home</RouterLink>
+            <RouterLink class="nav-link" aria-current="page" :to="{ name: 'home' }" @click="handleHomeClick">Home
+            </RouterLink>
           </li>
           <li class="nav-item">
             <RouterLink class="nav-link" aria-current="page" to="/about">Acerca de</RouterLink>
@@ -33,9 +34,21 @@
 import { computed } from 'vue';
 import Login from './Login.vue';
 import SearchBar from './helpers/SearchBar.vue';
-import { RouterLink } from 'vue-router'
+import { useRouter, RouterLink } from 'vue-router'
 import { useStore } from 'vuex';
 
 const store = useStore();
 const loggedIn = computed(() => store.state.loggedIn);
+const setSearchFilter = (search) => store.commit('setSearchFilter', search);
+
+const router = useRouter();
+
+const handleHomeClick = () => {
+  if (router.currentRoute.value.name === 'home') {
+    setSearchFilter('');
+  } else {
+    router.replace({ name: 'home' });
+  };
+};
+
 </script>
