@@ -13,7 +13,8 @@ app = Flask(__name__)  # crear el objeto app de la clase Flask
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
 
 # configuro la base de datos, con el nombre el usuario y la clave
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:root@localhost/CAC23001"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://tintinando:federico123@tintinando.mysql.pythonanywhere-services.com/tintinando$CAC23001"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:root@localhost/CAC23001"
 # URI de la BBDD   driver de la BD  user:clave@URLBBDD/nombreBBDD
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # none
 db = SQLAlchemy(app)  # crea el objeto db de la clase SQLAlquemy
@@ -115,21 +116,14 @@ def update_producto(id):
     db.session.commit()
     return producto_schema.jsonify(producto)
 
-@app.route("/uploadImg", methods=["POST"])
-def upload_file():
-    file = request.files['file']
-    if file:
-        filename = secure_filename(file.filename)
-        # método de werkzeug para eliminar caracteres problemáticos en el nombre
-        save_path = request.form['save_path']
-        save_path = save_path + "/" + filename
+@app.route("/find", methods=["GET"])
+def find_product():
+    search_term = request.args.get('name')
+    producto = db.session.query(Producto).filter(Producto.nombre.like("%" + search_term + "%")).all()
 
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
-
-        file.save(save_path)
-        return {'filename': filename, 'save_path': save_path}
-    return {'error': 'no hay archivo'}
+    return productos_schema.jsonify(
+        producto
+    )
 
 # programa principal *******************************
 if __name__ == "__main__":
