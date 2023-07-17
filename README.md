@@ -10,7 +10,7 @@ Para el backend se utilizó Python Flask para la gestión de rutas y MariaDB par
 El frontend es una SPA hecha íntegramente con Vue3 utilizando la sintaxis "Composition API". Incluye las librerías Vue-router para las rutas y Vuex para la administración de estado global. Para los estilos se utilizaron las clases de Bootstrap5
 
 ### Alojamiento
-La API de consulta se encuentra alojado en el servicio de PythonAnyware. Por razones de seguridad la 
+La API de consulta se encuentra alojado en el servicio de PythonAnyware.
 
 El frontend se encuentra en Netlify:
 https://tintinando-cac23001.netlify.app
