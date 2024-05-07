@@ -19,4 +19,4 @@ platformdirs==3.8.0
 PyMySQL==1.1.0
 SQLAlchemy==2.0.17
 typing_extensions==4.7.0
-Werkzeug==2.3.6
+Werkzeug==3.0.3
